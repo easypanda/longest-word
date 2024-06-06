@@ -19,13 +19,22 @@ class TestGame(unittest.TestCase):
     def test_is_valid(self):
             """Doctstring"""
 
-            grid_word = [x for x in "OQUWRBAZE"]
+            # setup
+            game = Game()
+            # Exercice
+            game.grid = list("OQUWRBAZE")
 
-            my_word = [x for x in "BAROQUE"]
+            my_word = list("BAROQUE")
 
-            for letters in grid_word:
+            for letters in game.grid:
                 if letters in my_word:
                     my_word.remove(letters)
 
-            self.assertLessEqual(len(my_word),len(grid_word))
+            self.assertLessEqual(len(my_word),len(game.grid))
             self.assertEqual(len(my_word),0)
+
+    def test_unknown_word_is_invalid(self):
+            """A word that is not in the English dictionary should not be valid"""
+            new_game = Game()
+            new_game.grid = list('KWIENFUQW') # Force the grid to a test case:
+            self.assertEqual(new_game.is_valid('FEUN'),False)
