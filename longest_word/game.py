@@ -22,6 +22,8 @@ class Game:
             return False
         elif len(lst_word) >= 1:
             return False
+        elif word == '':
+            return False
         elif r.json()['found'] == False:
             return False
         else:
